@@ -150,6 +150,8 @@ deploy() {
 
 reset_dev() {
   rails db:drop db:create && rake db:schema:load && rake db:migrate:with_data && redis-cli FLUSHDB && redis-cli FLUSHALL
+
+  echo "========================= Starting seeding =========================\n"
   rake db:seed --trace
 }
 
@@ -209,3 +211,7 @@ export DISABLE_SPRING=true
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
+
+# Fix autosuggest text color is not faded enough: https://stackoverflow.com/questions/47310537/how-to-change-zsh-autosuggestions-color
+AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=250'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
