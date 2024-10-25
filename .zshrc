@@ -168,9 +168,21 @@ gdev() {
     return 1
   fi
 
+  # Check if the branch already exists locally
+  if git rev-parse --verify "$1" > /dev/null 2>&1; then
+    echo "Branch $1 already exists locally. Not creating a new one."
+    return 1
+  fi
+
   git checkout -b "$1"
   if [ $? -ne 0 ]; then
     echo "Failed to create branch $1"
+    return 1
+  fi
+
+  # Check if the branch already exists on the remote
+  if git ls-remote --exit-code --heads origin "$1" > /dev/null; then
+    echo "Branch $1 already exists on the remote. Not pushing."
     return 1
   fi
 
