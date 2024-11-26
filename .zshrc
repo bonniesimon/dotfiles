@@ -118,8 +118,14 @@ alias rails="bundle exec rails"
 alias glogl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches"
 alias tmux="TERM=xterm-256color tmux"
 alias ovm="overmind"
+
+# [Depreciated] use 'or' instead
 alias ovmr="overmind restart"
+# [Depreciated] use 'oc' instead
 alias ovmc="overmind connect"
+
+alias oc="overmind connect"
+alias or="overmind restart"
 
 
 
