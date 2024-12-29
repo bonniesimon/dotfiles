@@ -1,0 +1,17 @@
+font-size = 15
+font-family = JetBrainsMono NFM Medium
+font-style = Medium
+shell-integration-features = no-cursor
+cursor-style = block
+shell-integration = zsh
+macos-titlebar-style = hidden
+window-padding-x = 5
+window-padding-y = 5
+window-height = 43
+window-width = 157
+window-save-state = always
+background-opacity = 0.99
+
+# theme = GruvboxDarkHard
+theme = Tomorrow Night Bright
+
