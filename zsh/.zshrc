@@ -117,6 +117,7 @@ alias gs="git status --show-stash --long"
 alias rails="bundle exec rails"
 alias glogl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches"
 alias tmux="TERM=xterm-256color tmux"
+alias tf="terraform"
 
 # [Depreciated] use 'or' instead
 alias ovmr="overmind restart"
@@ -168,7 +169,7 @@ gdev() {
 
   current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$current_branch" != "development" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
+  if [[ "$current_branch" != "development" && "$current_branch" != "master" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
     echo "Error: You must be on the 'development' branch or a 'release/v**' branch to create a new branch."
     return 1
   fi
@@ -273,8 +274,8 @@ alias tunnelto="/Applications/tunnelto"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # To make redis work with sidekiq for granite
 export REDIS_URL="redis://127.0.0.1:6379/12"
@@ -303,3 +304,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 ## Add gopls to path for zed
 export PATH="$PATH:$HOME/go/bin"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
