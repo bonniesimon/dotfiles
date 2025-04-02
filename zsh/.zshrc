@@ -155,7 +155,7 @@ deploy() {
 }
 
 reset_dev() {
-  rails db:drop db:create && rake db:schema:load && rake db:migrate:with_data && redis-cli FLUSHDB && redis-cli FLUSHALL
+  rails db:drop db:create && rake db:schema:load && rake db:migrate:with_data && redis-cli FLUSHDB && redis-cli FLUSHALL && rails log:clear tmp:clear
 
   echo "========================= Starting seeding =========================\n"
   rake db:seed --trace
@@ -170,7 +170,7 @@ gdev() {
   current_branch=$(git rev-parse --abbrev-ref HEAD)
 
   if [[ "$current_branch" != "development" && "$current_branch" != "master" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
-    echo "Error: You must be on the 'development' branch or a 'release/v**' branch to create a new branch."
+    echo "Error: You must be on the 'development' branch or a 'release/v**' branch or master branch to create a new branch."
     return 1
   fi
 
@@ -227,7 +227,7 @@ function ov-old() {
 
 function ovm() {
     local procfile="Procfile.dev"
-    local minimal_services="web,worker,css,js"
+    local minimal_services="web,worker,css,js,searchkick_worker"
     local config_target="/Users/bonstine/dev/bigbinary/rootlyhq/rootly/ngrok.yml"
     local config_minimal="/Users/bonstine/dev/bigbinary/rootlyhq/ngrok-configs/ngrok-minimal.yml"
     local config_full="/Users/bonstine/dev/bigbinary/rootlyhq/ngrok-configs/ngrok.yml"
@@ -264,7 +264,7 @@ function ovm() {
         log "Copying full config: $config_full -> $config_target"
         cp "$config_full" "$config_target"
         log "Starting overmind with all services"
-        overmind start -f "$procfile" "$@"
+        overmind start -f "$procfile" -x skyla_worker "$@"
     fi
 }
 
@@ -307,3 +307,8 @@ export PATH="$PATH:$HOME/go/bin"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+. "$HOME/.local/bin/env"
+
+# Added by Windsurf
+export PATH="/Users/bonstine/.codeium/windsurf/bin:$PATH"
