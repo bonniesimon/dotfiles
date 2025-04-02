@@ -1,6 +1,6 @@
 # Dotfiles
 
-Notes:
+## Notes:
 - For nvim, I'm using nvchad. So it is a submodule
 - If I get the following issue when doing git status:
     
@@ -15,7 +15,7 @@ Notes:
 
     Then the solution is to go into those submodule and commiting or restoring changes.
 
-- Usage:
+## Usage:
 
 ```bash
 # ~/dotfiles
