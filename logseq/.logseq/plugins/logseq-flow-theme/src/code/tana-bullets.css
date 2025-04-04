@@ -1,0 +1,112 @@
+/* ==========================================================================
+Fixes & Misc
+========================================================================== */
+/* Fix for bullet threading */
+.ls-block .bullet {
+  box-shadow: none !important;
+}
+
+.ls-block[data-refs-self*='"seed'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\ed51" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block[data-refs-self*='"project"'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\f66c" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block[data-refs-self*='"highlight'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\ef3f" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block[data-refs-self*='"evergreen'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\ed4f" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block[data-refs-self*='"task'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\ea5e" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block:is([data-refs-self*='"collaboration'], [data-refs-self*='"meeting']) > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\edcd" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block[data-refs-self*='"kanban'] > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\ec3f" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  .ls-block:is([data-refs-self*='"chatgpt'], [data-refs-self*='"chat gpt']) > .flex.flex-row.pr-2 .bullet-container .bullet:before {
+    content: "\f00b" !important;
+    font-family: 'tabler-icons';
+    color: hsl(var(--cl-primary), 0.95);
+    background-color: hsl(var(--cl-primary), 0.15);
+    border-radius: 50%;
+  }
+  /* set our position parameters so the new symbols align with the old bullet position */
+  .bullet-container {
+      position: relative;
+      top: -10px;
+      left: -5px;
+  }
+  .bullet-container.bullet-closed, .bullet-container.bullet-closed .bullet {
+      background-color: transparent !important;
+  }
+  .bullet-container.bullet-closed, .bullet-container.bullet-closed .bullet:before {
+      transition: 0.4s;
+      content: "\f6e2";
+      font-family: 'tabler-icons';
+      color: hsl(var(--cl-text-color), 0.65);
+  }
+  .bullet-container.bullet-closed:hover, .bullet-container.bullet-closed:hover .bullet:before {
+      content: "\f6e2";
+      color: hsl(var(--cl-accent));
+  }
+  .bullet-container.bullet-closed, .bullet-container:not(.bullet-closed) .bullet {
+      background-color: transparent !important;
+  }
+  .bullet-container.bullet-closed, .bullet-container:not(.bullet-closed) .bullet:before {
+      transition: 0.4s;
+      content: "\f698";
+      font-family: 'tabler-icons';
+      color: hsl(var(--cl-text-color), 0.65);
+  }
+  .bullet-container.bullet-closed:hover, .bullet-container:not(.bullet-closed):hover .bullet:hover:before {
+      content: "\f698";
+      color: hsl(var(--cl-accent));
+  }
+  .bullet-container:hover {
+    background-color: transparent !important;
+    font-weight: 300;
+  }
+  a:hover>.bullet-container .bullet {
+    transform: scale(1.0) !important;
+    font-weight: 300;
+  }
+/*.ls-block[data-refs-self*='"'] > .flex.flex-row.pr-2 .bullet-container:hover .bullet:before {
+    color: hsl(var(--cl-accent));
+    background-color: hsl(var(--cl-accent), 0.15);
+}
+.ls-block[data-refs-self*='"a'] > .flex.flex-row.pr-2 .bullet-container.bullet-closed .bullet:before {
+    background-color: hsl(var(--cl-primary), 0.85);
+    color: var(--bg-color);
+}*/

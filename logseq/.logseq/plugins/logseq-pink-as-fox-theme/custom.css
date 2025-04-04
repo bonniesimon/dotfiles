@@ -1,0 +1,473 @@
+@import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+:root {
+  /* hsl colors */
+  --fox-hs-1: 319deg, 100%;
+  --fox-l-1: 67%;
+
+  --fox-hs-2: 320deg, 100%;
+  --fox-l-2: 92%;
+
+  --fox-hs-bg: 0deg, 0%;
+  --fox-l-bg: 0%;
+
+  /* main colors */
+  --fox-background: hsl(var(--fox-hs-bg), var(--fox-l-bg));
+
+  --fox-color-1-lighter: hsl(var(--fox-hs-1), calc(var(--fox-l-1) + 10%));
+  --fox-color-1: hsl(var(--fox-hs-1), var(--fox-l-1));
+  --fox-color-1-darker: hsl(var(--fox-hs-1), calc(var(--fox-l-1) - 10%));
+
+  --fox-border-lighter: hsl(var(--fox-hs-1), calc(var(--fox-l-1) - 40%));
+  --fox-border: hsl(var(--fox-hs-1), calc(var(--fox-l-1) - 50%));
+  --fox-border-darker: hsl(var(--fox-hs-1), calc(var(--fox-l-1) - 60%));
+
+  --fox-color-2-lighter: hsl(var(--fox-hs-2), calc(var(--fox-l-2) + 10%));
+  --fox-color-2: hsl(var(--fox-hs-2), var(--fox-l-2));
+  --fox-color-2-darker: hsl(var(--fox-hs-2), calc(var(--fox-l-2) - 10%));
+  
+  --fox-shadow: hsla(var(--fox-hs-1), calc(var(--fox-l-1) - 50%), 0.2);
+
+  /* misc */
+  --red: #ff5555;
+  --orange: #ffb86c;
+  --yellow: #f1fa8c;
+  --green: #50fa7b;
+  --purple: #bd93f9;
+  --cyan: #8be9fd;
+  --pink: #ff79c6;
+
+  --ls-tag-text-opacity: 0.8;
+  --ls-tag-text-hover-opacity: 0.8;
+  --ls-page-text-size: 16px;
+  --ls-page-title-size: 36px;
+  /* --ls-font-family: "Fira Code"; */
+
+  --ls-border-radius-low: 3px;
+  --ls-border-radius-medium: 6px;
+}
+
+.dark-theme,
+html[data-theme="dark"] {
+  --ls-primary-background-color: var(--fox-background);
+  --ls-secondary-background-color: var(--fox-background);
+  --ls-tertiary-background-color: var(--fox-background);
+  --ls-quaternary-background-color: var(--fox-background);
+  --ls-quinary-background-color: var(--fox-background);
+
+  --ls-active-primary-color: var(--fox-color-1);
+  --ls-active-secondary-color: var(--fox-color-1);
+
+  --ls-primary-text-color: var(--fox-color-1);
+  --ls-secondary-text-color: var(--white-hover);
+
+  --ls-search-background-color: var(--fox-background);
+  --ls-border-color: var(--fox-border);
+  --ls-secondary-border-color: var(--fox-border);
+  --ls-menu-hover-color: var(--fox-border-darker);
+  --ls-table-tr-even-background-color: var(--fox-background);
+
+  --ls-head-text-color: var(--fox-color-1);
+  --ls-title-text-color: var(--fox-color-1);
+
+  --ls-link-text-color: var(--fox-color-1);
+  --ls-link-text-hover-color: var(--fox-color-1-darker);
+
+  --ls-link-ref-text-color: var(--fox-color-1);
+  --ls-link-ref-text-hover-color: var(--fox-color-1-darker);
+  --ls-block-ref-link-text-color: var(--ls-border-color);
+
+  --ls-tag-text-color: var(--fox-color-1);
+  --ls-tag-text-hover-color: var(--fox-color-1-lighter);
+
+  --ls-block-bullet-border-color: var(--fox-border);
+  --ls-block-bullet-color: var(--fox-color-1);
+  --ls-block-highlight-color: var(--fox-border-darker);
+  --ls-block-properties-background-color: var(--fox-background);
+
+  --ls-page-checkbox-color: transparent;
+  --ls-page-checkbox-border-color: var(--fox-color-1);
+
+  --ls-page-blockquote-color: var(--fox-color-1);
+  --ls-page-blockquote-bg-color: var(--fox-background);
+  --ls-page-blockquote-border-color: var(--fox-border-lighter);
+  --ls-page-properties-background-color: var(--fox-background);
+
+  --ls-page-inline-code-color: var(--fox-color-1);
+  --ls-page-inline-code-bg-color: var(--fox-border-darker);
+
+  --ls-scrollbar-background-color: var(--fox-background);
+  --ls-scrollbar-foreground-color: var(--fox-border);
+  --ls-scrollbar-thumb-hover-color: var(--fox-border-lighter);
+
+  --ls-icon-color: var(--fox-color-1);
+  --ls-search-icon-color: var(--fox-color-1);
+  --ls-a-chosen-bg: var(--fox-border-darker);
+  --ls-right-sidebar-code-bg-color: var(--fox-background);
+  --ls-selection-background-color: var(--fox-border-darker);
+  --ls-slide-background-color: var(--ls-primary-background-color);
+  --ls-guideline-color: var(--ls-border-color);
+  --color-level-1: var(--ls-secondary-background-color);
+  --color-level-2: var(--ls-primary-background-color);
+  --color-level-3: var(--ls-quaternary-background-color);
+  --color-level-4: var(--ls-tertiary-background-color);
+  --color-level-5: var(--ls-quinary-background-color);
+
+  --ls-cloze-text-color: var(--fox-color-1);
+}
+
+html[data-theme="dark"] .color-level {
+  outline: 1px solid var(--fox-border);
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  /* font-weight: var(--ls-font-weight);
+  letter-spacing: var(--ls-font-letter-spacing);
+  line-height: var(--ls-font-line-height);
+  font-size: var(--ls-page-text-size); */
+  background-color: var(--fox-background);
+}
+
+html[data-theme="dark"] i {
+  color: var(--fox-color-2-darker);
+}
+
+html[data-theme="dark"] b {
+  color: var(--fox-color-2-darker);
+}
+
+html[data-theme="dark"] mark {
+  background-color: var(--yellow);
+}
+
+html[data-theme="dark"] .bg-orange-400 {
+  background-color: var(--orange);
+}
+
+html[data-theme="dark"] .bg-green-600 {
+  background-color: var(--green);
+  color: var(--fox-background) !important;
+}
+
+html[data-theme="dark"] .bg-red-500,
+html[data-theme="dark"] .bg-red-600 {
+  background-color: var(--red);
+  color: var(--fox-background) !important;
+}
+
+html[data-theme="dark"] .form-checkbox {
+  border: 1px solid var(--ls-page-checkbox-border-color) !important;
+  border-radius: var(--ls-border-radius-low) !important;
+}
+
+html[data-theme="dark"] .external-link {
+  color: var(--fox-color-1);
+  text-decoration: none;
+  /* border-bottom: none; */
+}
+
+html[data-theme="dark"] .external-link:hover {
+  color: var(--fox-color-1-darker);
+}
+
+html[data-theme="dark"] h1.title,
+html[data-theme="dark"] .ls-block h1,
+html[data-theme="dark"] .ls-block h2,
+html[data-theme="dark"] .ls-block h3,
+html[data-theme="dark"] .ls-block h4,
+html[data-theme="dark"] .ls-block h5,
+html[data-theme="dark"] .ls-block h6 {
+  font-weight: 400;
+}
+
+html[data-theme="dark"] .priority {
+  color: var(--ls-tag-text-color);
+  opacity: 1 !important;
+  font-size: 0px; /* Hide text */
+}
+
+html[data-theme="dark"] .priority:hover,
+html[data-theme="dark"] a.tooltip-priority:hover {
+  color: var(--ls-tag-text-hover-color);
+  opacity: 0.5;
+}
+
+html[data-theme="dark"] a.priority[href="#/page/A"]:before {
+  content: "A";
+  background: var(--red);
+}
+
+html[data-theme="dark"] a.priority[href="#/page/B"]:before {
+  content: "B";
+  background: var(--yellow);
+}
+
+html[data-theme="dark"] a.priority[href="#/page/C"]:before {
+  content: "C";
+  background: var(--green);
+}
+
+html[data-theme="dark"] a.priority:before {
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 1px 4px 0px 3px;
+  margin: 0px 2px 0px 0px;
+  border-radius: var(--ls-border-radius-low);
+  color: var(--ls-primary-background-color);
+}
+
+html[data-theme="dark"] a.tooltip-priority {
+  color: var(--ls-tag-text-color);
+}
+
+html[data-theme="dark"] .Tooltip__label {
+  background: var(--ls-quinary-background-color);
+}
+
+html[data-theme="dark"] .Tooltip__label::after {
+  border-bottom-color: var(--ls-quinary-background-color);
+}
+
+html[data-theme="dark"] .page-reference .bracket {
+  color: var(--fox-border);
+  opacity: 0.8;
+}
+
+html[data-theme="dark"] a.tag {
+  background: transparent;
+  border-radius: 3px 3px 3px 3px;
+  padding: 0px 3px;
+  color: var(--fox-color-1);
+  font-weight: 400;
+  outline: 1px solid var(--fox-color-1);
+}
+
+html[data-theme="dark"] a.tag:hover {
+  background: var(--fox-color-1);
+  color: var(--fox-background);
+}
+
+html[data-theme="dark"] .left-sidebar-inner {
+  border-right-color: var(--fox-border);
+  border-right-style: solid;
+  border-right-width: 2px;
+  --ls-quaternary-background-color: var(--fox-border-darker);
+}
+
+html[data-theme="dark"] #right-sidebar-container {
+  border-left-color: var(--fox-border);
+  border-left-style: solid;
+  border-left-width: 2px;
+}
+
+/* Changes all icons to the same color */
+html[data-theme="dark"] .ti {
+  color: var(--ls-icon-color);
+}
+
+/* Changes sidebar link colors to the same color as the icons */
+html[data-theme="dark"] .left-sidebar-inner a.item > span {
+  color: var(--ls-icon-color);
+}
+
+html[data-theme="dark"] .ui__button.bg-indigo-600,
+html[data-theme="dark"] .ui__toggle .bg-indigo-600 {
+  background-color: var(--fox-color-1);
+  color: var(--fox-background);
+}
+
+html[data-theme="dark"] .ui__toggle .switcher {
+  background-color: var(--fox-background);
+}
+
+html[data-theme="dark"] .form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke='%23ff55c8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+  /* outline-color: var(--fox-color-1) !important; */
+  border-color: var(--fox-color-1) !important;
+}
+
+html[data-theme="dark"] .tippy-tooltip,
+html[data-theme="dark"] .embed-block {
+  outline: 2px solid var(--fox-border);
+}
+
+html[data-theme="dark"] .ls-block.shadow-xl { /* card */
+  border: 1px solid var(--fox-border);
+  --tw-shadow: 0 20px 25px -5px var(--fox-shadow),0 10px 10px -5px var(--fox-shadow);
+  margin-left: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+html[data-theme="dark"] .block-content {
+  color: var(--fox-color-2);
+}
+
+html[data-theme="dark"] .arrow-regular {
+  --ls-quaternary-background-color: var(--fox-border);
+}
+
+html[data-theme="dark"] #left-sidebar .page-icon {
+  color: var(--fox-color-1);
+}
+
+html[data-theme="dark"] .add-button-link-wrap:hover .add-button-link {
+  opacity: 1;
+  transform: initial;
+}
+
+html[data-theme="dark"] .form-checkbox {
+  border: 1px solid var(--fox-color-1) !important;
+  border-radius: var(--ls-border-radius-low);
+  cursor: pointer;
+}
+
+html[data-theme="dark"] .block-properties {
+  border: 2px dashed var(--fox-border);
+}
+
+/* progress bar */
+html[data-theme="dark"] #main-content-container .rounded-full.bg-indigo-200 {
+  outline: 1px solid var(--fox-color-1);
+  background-color: var(--fox-background);
+}
+html[data-theme="dark"] #main-content-container .rounded-full.bg-indigo-200 .bg-indigo-600 {
+  background-color: var(--fox-color-1);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+html[data-theme="dark"] .blocks-container p {
+  color: var(--fox-color-2); /* checkbox list, ... */
+}
+
+/*
+
+    Name:       Dracula for CodeMirror
+    Author:     Michael Kaminsky (http://github.com/mkaminsky11)
+    Adapted by:    Sly Bouhafs
+
+
+    Original dracula color scheme by Zeno Rocha (https://github.com/zenorocha/dracula-theme)
+    Adapted for logseq
+
+*/
+
+.CodeMirror {
+  font-family: 'Fira Code';
+  line-height: 1.2;
+}
+
+html[data-theme="dark"] .CodeMirror {
+  background: var(--fox-background);
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  color: var(--fox-color-2);
+  outline: 2px solid var(--fox-border);
+}
+
+html[data-theme="dark"] .cm-s-default .CodeMirror,
+html[data-theme="dark"] .CodeMirror .CodeMirror-gutters {
+  background-color: transparent;
+  color: var(--fox-color-2) !important;
+  border: none;
+}
+
+html[data-theme="dark"] .extensions__code-lang {
+  background: var(--fox-background);
+}
+
+html[data-theme="dark"] .CodeMirror {
+  border: 5px solid var(--fox-background);
+}
+
+html[data-theme="dark"] .CodeMirror .CodeMirror-gutters {
+  color: var(--fox-background);
+}
+html[data-theme="dark"] .CodeMirror .CodeMirror-cursor {
+  border-left: solid thin var(--fox-color-2);
+}
+html[data-theme="dark"] .CodeMirror .CodeMirror-linenumber {
+  color: var(--fox-border);
+}
+html[data-theme="dark"] .CodeMirror .CodeMirror-selected {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="dark"] .CodeMirror .CodeMirror-line {
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .CodeMirror .CodeMirror-line::selection,
+html[data-theme="dark"] .CodeMirror .CodeMirror-line > span::selection,
+html[data-theme="dark"] .cm-s-default .CodeMirror-line > span > span::selection {
+  background: rgba(255, 255, 255, 0.1);
+}
+html[data-theme="dark"] .CodeMirror .CodeMirror-line::-moz-selection,
+html[data-theme="dark"] .CodeMirror .CodeMirror-line > span::-moz-selection,
+html[data-theme="dark"] .cm-s-default .CodeMirror-line > span > span::-moz-selection {
+  background: rgba(255, 255, 255, 0.1);
+}
+html[data-theme="dark"] .CodeMirror span.cm-comment {
+  color: var(--fox-color-1-darker);
+}
+html[data-theme="dark"] .CodeMirror span.cm-string,
+html[data-theme="dark"] .CodeMirror span.cm-string-2 {
+  color: var(--yellow);
+}
+html[data-theme="dark"] .CodeMirror span.cm-number {
+  color: var(--purle);
+}
+html[data-theme="dark"] .CodeMirror span.cm-variable {
+  color: var(--green);
+}
+html[data-theme="dark"] .CodeMirror span.cm-variable-2 {
+  color: var(--fox-color-2);
+}
+html[data-theme="dark"] .CodeMirror span.cm-def {
+  color: var(--green);
+}
+html[data-theme="dark"] .CodeMirror span.cm-operator {
+  color: var(--pink);
+}
+html[data-theme="dark"] .CodeMirror span.cm-keyword {
+  color: var(--pink);
+}
+html[data-theme="dark"] .CodeMirror span.cm-atom {
+  color: var(--purple);
+}
+html[data-theme="dark"] .CodeMirror span.cm-meta {
+  color: var(--fox-color-2);
+}
+html[data-theme="dark"] .CodeMirror span.cm-tag {
+  color: var(--pink);
+}
+html[data-theme="dark"] .CodeMirror span.cm-attribute {
+  color: var(--green);
+}
+html[data-theme="dark"] .CodeMirror span.cm-qualifier {
+  color: var(--green);
+}
+html[data-theme="dark"] .CodeMirror span.cm-property {
+  color: var(--cyan);
+}
+html[data-theme="dark"] .CodeMirror span.cm-builtin {
+  color: var(--green);
+}
+html[data-theme="dark"] .CodeMirror span.cm-variable-3,
+html[data-theme="dark"] .CodeMirror span.cm-type {
+  color: var(--orange);
+}
+
+html[data-theme="dark"] .CodeMirror .CodeMirror-activeline-background {
+  background: rgba(255, 255, 255, 0.1);
+}
+html[data-theme="dark"] .CodeMirror .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: var(--fox-color-2) !important;
+}
+
+html[data-theme="dark"] #right-sidebar pre.CodeMirror-line {
+  background: transparent;
+}

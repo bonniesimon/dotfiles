@@ -1,0 +1,104 @@
+/******************************,
+**    Page References    **
+******************************/
+.page-reference .bracket {
+    opacity: 0.3;
+    color: hsl(var(--cl-text-color), 1);
+}
+.ls-block .page-ref {
+    margin-top: 1px;
+}
+.ls-block .page-reference:hover {
+    background-color: transparent !important;
+    color: hsl(var(--cl-primary), 1);
+    filter: brightness(1.2);
+}
+
+mark .page-reference {
+    text-decoration-color: hsl(var(--cl-secondary));
+}
+
+/******************************,
+**    Block References    **
+******************************/
+/*.block-ref:before {
+    content: " ";
+    color: hsl(var(--cl-primary), 1);
+    vertical-align: middle;
+    background-color: hsl(var(--cl-accent), 1);
+    border-radius: 2px;
+    font-size: 7px;
+    position: relative;
+    top: -1.5px;
+    margin-right: 5px;
+    margin-left: 2px;
+    padding-right: 1px;
+}*/
+:not(.whiteboard-shape) .block-ref {
+    border-bottom: 0px dashed hsl(var(--cl-text-color), 0.15);
+    color: hsl(var(--cl-secondary), 0.85);
+    background-color: hsl(var(--cl-accent), 0);
+    border-radius: 0px;
+    opacity: 1;
+    transition: 0.2s;
+}
+.block-ref:hover {
+    cursor: pointer;
+    color: hsl(var(--cl-secondary));
+    border-radius: var(--cl-border-radius);
+    transition: 0.2s;
+}
+.block-ref mark {
+    padding: 0px 1px;
+    border-radius: 0px;
+}
+.block-ref .external-link {
+    text-underline-offset: 4px !important;
+}
+.block-ref .block-ref {
+    border-bottom: 0px solid !important;
+}
+.block-marker + .block-ref-wrap > div > .block-ref .block-marker, .block-marker + .block-ref-wrap > div > .block-ref .form-checkbox {
+    display: none;
+}
+.open-block-ref-link {
+    background-color: hsl(var(--cl-text-color), 0.1);
+    color: hsl(var(--cl-text-color), 1);
+    font-weight: 400;
+}
+/******************************
+**    Reference Panel    **
+******************************/
+
+/******************************
+**    Embeds    **
+******************************/
+
+/******************************
+**    Block Children Border    **
+******************************/
+
+.block-children-left-border {
+    background-color: var(--cl-children-left-border, transparent);
+}
+.block-children {
+    border-left-color: var(--cl-children-border-color, var(--ls-guideline-color));
+}
+/* ==========================================================================
+Block Color Styling
+========================================================================== */
+.inline[style*="color"] .tag {
+    background-color: transparent;
+    padding: 0px;
+}
+.inline[style*="color"] .page-ref {
+    font-weight: 500;
+    text-decoration: underline;
+}
+.inline[style*="color"] .block-marker {
+    color: var(--bg-color);
+    opacity: 0.8;
+}
+.inline[style*="color"] .form-checkbox {
+    border-color: var(--bg-color);
+}
