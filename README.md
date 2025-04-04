@@ -14,6 +14,7 @@
     ```
 
     Then the solution is to go into those submodule and commiting or restoring changes.
+- For logseq, don't do `stow logseq`. This is because there is a .graph folder which will be overwritten.
 
 ## Usage:
 
@@ -25,3 +26,4 @@ stow <package-name>
 stow nvim
 stow alacritty
 ```
+
