@@ -1,4 +1,4 @@
-font-size = 15
+font-size = 13
 font-family = JetBrainsMono NFM Medium
 font-style = Medium
 shell-integration-features = no-cursor
@@ -11,7 +11,10 @@ window-height = 43
 window-width = 157
 window-save-state = always
 background-opacity = 0.99
+# Better titlebar in Mint
+window-decoration = server
 
 # theme = GruvboxDarkHard
-theme = Tomorrow Night Bright
+# theme = Tomorrow Night Bright
+theme = catppuccin-mocha
 
