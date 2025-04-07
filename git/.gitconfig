@@ -5,28 +5,32 @@
 	defaultBranch = main
 
 # git-delta configurations
-
 [include]
   path = ~/.config/delta/themes.gitconfig
 
 [core]
-    pager = delta
+  pager = delta
+  editor = nvim
 
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+  # Unsure why we need --feature=interactive
+  diffFilter = delta --color-only --features=interactive
 
 [delta]
-    #features from ~/.config/delta/themes.gitconfig
+  navigate = true
+  # features from ~/.config/delta/themes.gitconfig
   features = calochortus-lyallii
   true-color = always
 
 [delta "interactive"]
-    keep-plus-minus-markers = false
-
-
-
+  # I'm unsure why I have this
+  keep-plus-minus-markers = false
 
 [column]
 	ui = auto
+
 [branch]
 	sort = -committerdate
+
+[merge]
+  conflictstyle = zdiff3
