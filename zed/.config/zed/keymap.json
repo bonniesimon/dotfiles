@@ -9,8 +9,6 @@
   {
     "context": "Workspace",
     "bindings": {
-      "cmd-r": "workspace::ToggleLeftDock",
-      "cmd-b": "workspace::ToggleRightDock"
     }
   },
   {
