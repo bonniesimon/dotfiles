@@ -5,9 +5,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-plugins=(git ruby rails yarn bundler docker docker-compose brew osx z node)
-# To make z work
-. ~/z.sh
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git ruby rails yarn bundler docker docker-compose z node zsh-autosuggestions zsh-syntax-highlighting)
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -76,13 +80,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -127,13 +124,15 @@ alias ovmc="overmind connect"
 alias oc="overmind connect"
 alias or="overmind restart"
 
+alias lock="cinnamon-screensaver-command -l"
+
 
 
 ghissue() {
   gh issue develop $1 -n "$1-$2" -b "main" -c
 }
 
-# This will checkout main, update it, create a release branch, 
+# This will checkout main, update it, create a release branch,
 # create a PR and then open it in the browser.
 release() {
   gco main
@@ -144,7 +143,7 @@ release() {
   gh pr view --web
 }
 
-# This will checkout production, update it, This will merge 
+# This will checkout production, update it, This will merge
 # the release branch to production and then push it to remote.
 deploy() {
   gco production
@@ -199,46 +198,20 @@ gdev() {
   fi
 }
 
-# start overmind with flags
-function ov-old() {
-    local procfile="Procfile.dev"
-    local minimal_services="web,worker,css,js"
-    
-    # Handle help before passing to overmind
-    if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
-        echo "Usage: ovm [options]"
-        echo
-        echo "Options:"
-        echo "  -h, --help    Show this help message"
-        echo "  -m            Run with minimal services ($minimal_services)"
-        echo "  [any]         Any other flags are passed directly to overmind"
-        echo
-        echo "Examples:"
-        echo "  ovm           # runs: overmind start -f $procfile"
-        echo "  ovm -m        # runs: overmind start -f $procfile -l $minimal_services"
-        echo "  ovm -f other  # runs: overmind start -f $procfile -f other"
-        return 0
-    elif [[ "$1" == "-m" ]]; then
-        overmind start -f "$procfile" -l "$minimal_services"
-    else
-        overmind start -f "$procfile" "$@"
-    fi
-}
-
 function ovm() {
     local procfile="Procfile.dev"
     local minimal_services="web,worker,css,js,searchkick_worker"
     local config_target="/Users/bonstine/dev/bigbinary/rootlyhq/rootly/ngrok.yml"
     local config_minimal="/Users/bonstine/dev/bigbinary/rootlyhq/ngrok-configs/ngrok-minimal.yml"
     local config_full="/Users/bonstine/dev/bigbinary/rootlyhq/ngrok-configs/ngrok.yml"
-    
+
     # Function to print colored logs
     log() {
         local blue='\033[0;34m'
         local nc='\033[0m' # No Color
         echo -e "${blue}[ov]${nc} $1"
     }
-    
+
     # Handle help before passing to overmind
     if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
         echo "Usage: ovm [options]"
@@ -269,46 +242,53 @@ function ovm() {
 }
 
 # Application Aliases
-alias tunnelto="/Applications/tunnelto"
+# alias tunnelto="/Applications/tunnelto"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 # To make redis work with sidekiq for granite
-export REDIS_URL="redis://127.0.0.1:6379/12"
+# export REDIS_URL="redis://127.0.0.1:6379/12"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Bindings to move word in iterm
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-bindkey "^[a" beginning-of-line
-bindkey "^[e" end-of-line
+# bindkey "[D" backward-word
+# bindkey "[C" forward-word
+# bindkey "^[a" beginning-of-line
+# bindkey "^[e" end-of-line
 
 # Fix issue with ruby https://github.com/rails/rails/issues/38560
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export DISABLE_SPRING=true
 
-# Adding completion for ngrok
-if command -v ngrok &>/dev/null; then
-  eval "$(ngrok completion)"
-fi
+# Fix tmux not showing prompt icons
+alias tmux="TERM=xterm-256color tmux"
+
 
 # Fix autosuggest text color is not faded enough: https://stackoverflow.com/questions/47310537/how-to-change-zsh-autosuggestions-color
 AUTOSUGGESTION_HIGHLIGHT_COLOR='fg=250'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
-## Add gopls to path for zed
+# New autocomplete of zsh
+autoload -U +X bashcompinit && bashcompinit
+
+# Adding to $PATH
+# zoxide
+export PATH="$PATH:$HOME/.local/bin"
+# rbenv
+export PATH="$PATH:$HOME/.rbenv/bin"
+# nvim appimage to /opt/nvim/nvim
+export PATH="$PATH:/opt/nvim/"
+# golang
+export PATH="$PATH:/usr/local/go/bin"
+# overmind
 export PATH="$PATH:$HOME/go/bin"
 
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
 
-. "$HOME/.local/bin/env"
+eval "$(zoxide init zsh)"
 
-# Added by Windsurf
-export PATH="/Users/bonstine/.codeium/windsurf/bin:$PATH"
+# Added by `rbenv init` on Friday 04 April 2025 09:23:58 PM IST
+eval "$(rbenv init - --no-rehash zsh)"
