@@ -126,7 +126,9 @@ alias or="overmind restart"
 
 alias lock="cinnamon-screensaver-command -l"
 
-
+cursor() {
+    nohup ~/Applications/cursor.appimage "$@" > /dev/null 2>&1 &
+}
 
 ghissue() {
   gh issue develop $1 -n "$1-$2" -b "main" -c
