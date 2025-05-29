@@ -266,6 +266,9 @@ export NVM_DIR="$HOME/.nvm"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export DISABLE_SPRING=true
 
+# Source secret env variables from ~/.zsh_secrets
+[[ -f ~/.zsh_secrets ]] && source ~/.zsh_secrets
+
 # Fix tmux not showing prompt icons
 alias tmux="TERM=xterm-256color tmux"
 
