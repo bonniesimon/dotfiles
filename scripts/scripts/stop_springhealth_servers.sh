@@ -63,7 +63,6 @@ for pid in $(pgrep -f "[n]ode --max-old-space-size=8192 server.js"); do
         echo "Sending stop signal..."
         kill "$pid"
         FOUND_PID=$pid
-        break # Exit the loop once we've found and killed the process
     fi
 done
 
