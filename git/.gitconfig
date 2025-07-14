@@ -4,6 +4,9 @@
 [init]
 	defaultBranch = main
 
+[includeIf "gitdir:~/dev/incubyte/springhealth/"]
+  path = ~/dev/incubyte/springhealth/.gitconfig-springhealth
+
 # git-delta configurations
 [include]
   path = ~/.config/delta/themes.gitconfig
