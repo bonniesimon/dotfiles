@@ -1,0 +1,19 @@
+{
+  "React Arrow Function Component Export": {
+    "prefix": "rafce",
+    "body": [
+      "import React from 'react';",
+      "",
+      "const ${1:ComponentName} = () => {",
+      "  return (",
+      "    <div>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default ${1:ComponentName};"
+    ],
+    "description": "Creates a React arrow function component with a default export."
+  }
+}
