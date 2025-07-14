@@ -170,8 +170,8 @@ gdev() {
 
   current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$current_branch" != "development" && "$current_branch" != "master" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
-    echo "Error: You must be on the 'development' branch or a 'release/v**' branch or master branch to create a new branch."
+  if [[ "$current_branch" != "dev" && "$current_branch" != "main" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
+    echo "Error: You must be on the 'dev' branch or a 'release/v**' branch or main branch to create a new branch."
     return 1
   fi
 
