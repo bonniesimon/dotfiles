@@ -7,19 +7,39 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "dock": "right",
+    "default_profile": "write",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1"
+    },
+    "version": "2"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "icon_theme": "JetBrains Icons Dark",
   "features": {
-    "edit_prediction_provider": "supermaven"
+    "edit_prediction_provider": "none"
   },
   "base_keymap": "VSCode",
   "telemetry": {
     "metrics": false,
     "diagnostics": false
   },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false
+  },
   "vim_mode": true,
+  "cursor_blink": false,
   "relative_line_numbers": true,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
-  "ui_font_size": 14,
+  "ui_font_size": 13,
+  "vertical_scroll_margin": 12,
   "buffer_font_size": 14,
+  "use_smartcase_search": true,
   "project_panel": {
     "dock": "right"
   },
@@ -29,10 +49,16 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "JetBrains New Dark"
   },
   "tab_bar": {
     "show": false
+  },
+  "minimap": {
+    "show": "never",
+    "thumb": "hover",
+    "thumb_border": "none",
+    "current_line_highlight": "all"
   },
   "hints": {
     "assignVariableTypes": true,
@@ -42,5 +68,23 @@
     "functionTypeParameters": true,
     "parameterNames": true,
     "rangeVariableTypes": true
+  },
+  "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "rubocop", "!solargraph"]
+    }
+  },
+  "lsp": {
+    "ruby-lsp": {
+      "settings": {
+        "use_bundler": true
+      },
+      "initialization_options": {
+        "enabledFeatures": {
+          // This disables diagnostics
+          "diagnostics": false
+        }
+      }
+    }
   }
 }
