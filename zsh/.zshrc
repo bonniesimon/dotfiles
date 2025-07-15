@@ -126,6 +126,14 @@ alias or="overmind restart"
 
 alias lock="cinnamon-screensaver-command -l"
 
+aicommit() {
+    if [ -z "$(git diff --cached)" ]; then
+        echo "No staged changes to commit."
+        return 1
+    fi
+    git diff --cached | gemini --prompt "Generate a concise commit message:" | xclip -sel clip && git commit
+}
+
 cursor() {
     nohup ~/Applications/cursor.appimage "$@" > /dev/null 2>&1 &
 }
