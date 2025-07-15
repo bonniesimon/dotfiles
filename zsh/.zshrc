@@ -131,7 +131,18 @@ aicommit() {
         echo "No staged changes to commit."
         return 1
     fi
-    git diff --cached | gemini --prompt "Generate a concise commit message:" | xclip -sel clip && git commit
+
+    echo "🤖 Generating commit message..."
+    local commit_message=$(git diff --cached | gemini --prompt "Generate a concise commit message:")
+
+    if [ $? -eq 0 ] && [ -n "$commit_message" ]; then
+        echo "✅ Generated commit message: $commit_message"
+        echo "$commit_message" | xclip -sel clip
+        git commit
+    else
+        echo "❌ Failed to generate commit message."
+        return 1
+    fi
 }
 
 cursor() {
