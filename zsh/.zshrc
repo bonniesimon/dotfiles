@@ -335,9 +335,27 @@ export PATH="$PATH:/opt/nvim/"
 export PATH="$PATH:/usr/local/go/bin"
 # overmind
 export PATH="$PATH:$HOME/go/bin"
+# springhealth directory
+export SPRING_DIRECTORY=~/dev/incubyte/springhealth
 
 
 eval "$(zoxide init zsh)"
 
 # Added by `rbenv init` on Friday 04 April 2025 09:23:58 PM IST
 eval "$(rbenv init - --no-rehash zsh)"
+[[ ! -f $SPRING_DIRECTORY/spring-cli/init.sh ]] || source $SPRING_DIRECTORY/spring-cli/init.sh
+
+# pnpm
+export PNPM_HOME="/home/bonstine/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# bun completions
+[ -s "/home/bonstine/.bun/_bun" ] && source "/home/bonstine/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
