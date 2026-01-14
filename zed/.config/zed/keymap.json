@@ -7,6 +7,11 @@
 // from the command palette.
 [
   {
+    "bindings": {
+      "ctrl-escape": "menu::Cancel"
+    }
+  },
+  {
     "context": "Workspace",
     "bindings": {
       "cmd-r": "workspace::ToggleLeftDock",
@@ -18,6 +23,12 @@
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
       "ctrl-b": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": "vim::PushAddSurrounds"
     }
   }
 ]

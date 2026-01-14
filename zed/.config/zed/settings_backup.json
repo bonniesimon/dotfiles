@@ -7,20 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "assistant": {
-    "default_profile": "write",
+  "agent": {
+    "dock": "right",
+    "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4.1"
-    },
-    "version": "2"
+      "model": "gpt-5"
+    }
   },
   "git_panel": {
     "dock": "right"
   },
   "icon_theme": "JetBrains Icons Dark",
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "none"
   },
   "base_keymap": "VSCode",
   "telemetry": {
@@ -35,21 +35,30 @@
   "cursor_blink": false,
   "relative_line_numbers": true,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_weight": 300,
   "ui_font_size": 13,
+  "vertical_scroll_margin": 12,
   "buffer_font_size": 14,
+  "use_smartcase_search": true,
   "project_panel": {
     "dock": "right"
   },
   "outline_panel": {
     "dock": "right"
   },
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "JetBrains New Dark"
-  },
+  "theme": "Solarized Light",
   "tab_bar": {
     "show": false
+  },
+  "minimap": {
+    "show": "never",
+    "thumb": "hover",
+    "thumb_border": "none",
+    "current_line_highlight": "all"
+  },
+  "restore_on_startup": "last_session",
+  "file_finder": {
+    "modal_max_width": "medium"
   },
   "hints": {
     "assignVariableTypes": true,
@@ -63,6 +72,27 @@
   "languages": {
     "Ruby": {
       "language_servers": ["ruby-lsp", "rubocop", "!solargraph"]
+    },
+    "JavaScript": {
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "formatter": "prettier"
+    },
+    "TypeScript": {
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "formatter": "prettier"
+    },
+    "TSX": {
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      },
+      "formatter": "prettier"
     }
   },
   "lsp": {
@@ -72,9 +102,14 @@
       },
       "initialization_options": {
         "enabledFeatures": {
-          // This disables diagnostics
-          "diagnostics": false
+          "diagnostics": true
         }
+      }
+    },
+    "vtsls": {
+      "settings": {
+        "typescript": { "tsserver": { "maxTsServerMemory": 16184 } },
+        "javascript": { "tsserver": { "maxTsServerMemory": 16184 } }
       }
     }
   }
