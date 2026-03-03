@@ -15,7 +15,7 @@ RAILS_PATH="/home/bonstine/dev/incubyte/springhealth/rotom"
 NODE_PROJECT_PATH="/home/bonstine/dev/incubyte/springhealth/member-portal"
 
 RAILS_COMMAND="bin/rails s"
-NODE_COMMAND="yarn dev"
+NODE_COMMAND="nvm use && yarn dev"
 
 
 # --- 2. Main Logic ---

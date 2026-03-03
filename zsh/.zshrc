@@ -126,6 +126,13 @@ alias or="overmind restart"
 
 alias lock="cinnamon-screensaver-command -l"
 
+alias springhealth_dev="~/scripts/setup_springhealth_dev.sh"
+ # Editor aliases for SpringHealth projects
+ alias mpz="cd /home/bonstine/dev/incubyte/springhealth/member-portal && zed ."
+ alias mpc="cd /home/bonstine/dev/incubyte/springhealth/member-portal && cursor ."
+ alias rz="cd /home/bonstine/dev/incubyte/springhealth/rotom && zed ."
+ alias rc="cd /home/bonstine/dev/incubyte/springhealth/rotom && cursor ."
+
 aicommit() {
     if [ -z "$(git diff --cached)" ]; then
         echo "No staged changes to commit."
@@ -144,6 +151,8 @@ aicommit() {
         return 1
     fi
 }
+
+alias sshjim='ssh -i ".ssh/jim-ec2.pem" ubuntu@ec2-65-1-134-128.ap-south-1.compute.amazonaws.com'
 
 cursor() {
     nohup ~/Applications/cursor.appimage "$@" > /dev/null 2>&1 &
