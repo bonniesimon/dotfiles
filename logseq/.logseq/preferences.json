@@ -1,37 +1,37 @@
 {
   "theme": {
-    "name": "Bonofix Theme",
-    "url": "assets:///Users/bonstine/.logseq/plugins/logseq-bonofix-theme/custom.css",
-    "description": "A clean theme",
-    "pid": "logseq-bonofix-theme"
+    "name": "panic-theme",
+    "url": "assets:///home/bonstine/.logseq/plugins/logseq-panic-theme/custom.css",
+    "description": "Dark blue theme inspired by Panic Mode template",
+    "pid": "logseq-panic-theme"
   },
   "themes": {
-    "mode": "dark",
+    "mode": "light",
     "light": {
-      "name": "Customized Github theme",
-      "url": "assets:///Users/bonstine/.logseq/plugins/logseq-cusgit-theme/custom.css",
-      "description": "Customized Github theme for logseq",
-      "pid": "logseq-cusgit-theme",
-      "group-first": true,
-      "group-desc": "light & dark themes",
+      "name": "Flexoki Light",
+      "url": "assets:///home/bonstine/.logseq/plugins/logseq-flexoki-theme/flexoki-theme.css",
+      "description": "Enhanced Flexoki theme with warm, paper-inspired colors for light mode. Features improved accessibility, responsive design, and professional typography.",
       "mode": "light",
+      "pid": "logseq-flexoki-theme",
       "selected": false
     },
     "dark": {
-      "name": "Catppuccin Mocha",
-      "url": "assets:///Users/bonstine/.logseq/plugins/logseq-catppuccin/ctp-mocha.css",
-      "description": "Catppuccin Mocha",
+      "name": "Customized Github theme",
+      "url": "assets:///home/bonstine/.logseq/plugins/logseq-cusgit-theme/custom.css",
+      "description": "Customized Github theme for logseq",
+      "pid": "logseq-cusgit-theme",
+      "group-first": false,
+      "group-desc": null,
       "mode": "dark",
-      "pid": "logseq-catppuccin",
       "selected": false
     }
   },
   "externals": [],
   "pinnedToolbarItems": [
-    "logseq-tags:tags-plugin-open",
     "logseq-random-note:logseq-random-note-toolbar",
+    "logseq-journals-calendar:goto-today",
     "logseq-journals-calendar:open-calendar",
-    "logseq-random-note:RandomNote",
-    "logseq-journals-calendar:goto-today"
+    "logseq-tags:tags-plugin-open",
+    "logseq-random-note:RandomNote"
   ]
 }

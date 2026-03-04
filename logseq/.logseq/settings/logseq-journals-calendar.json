@@ -4,7 +4,10 @@
   "backgroundColorOfContainerLight": "#ffffff",
   "backgroundColorOfContainerDark": "#000000",
   "hotkey": null,
-  "keepOpenOnSelect": true,
+  "hotkeyPrevDay": "mod+shift+left",
+  "hotkeyNextDay": "mod+shift+right",
+  "keepOpenOnSelect": false,
   "showWeekNumbers": false,
+  "showIsoWeeknumbers": false,
   "disabled": false
 }

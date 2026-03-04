@@ -5,12 +5,5 @@
   "randomTags": "",
   "advancedQuery": "",
   "randomStepSize": "1",
-  "disabled": false,
-  "enableTelegramBot": false,
-  "telegramBotToken": "",
-  "telegramBotChatId": "",
-  "activeHours": [],
-  "activeMinutes": [
-    "0"
-  ]
+  "disabled": false
 }
