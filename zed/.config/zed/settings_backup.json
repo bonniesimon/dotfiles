@@ -12,28 +12,34 @@
     "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5"
-    }
+      "model": "claude-opus-4.5",
+    },
   },
   "git_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "icon_theme": "JetBrains Icons Dark",
   "features": {
-    "edit_prediction_provider": "none"
+    "edit_prediction_provider": "none",
   },
   "base_keymap": "VSCode",
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
+    "diagnostics": false,
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+      "max_severity": "error",
+    },
   },
   "toolbar": {
     "breadcrumbs": true,
-    "quick_actions": false
+    "quick_actions": false,
   },
   "vim_mode": true,
   "cursor_blink": false,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_font_weight": 300,
   "ui_font_size": 13,
@@ -41,76 +47,71 @@
   "buffer_font_size": 14,
   "use_smartcase_search": true,
   "project_panel": {
-    "dock": "right"
+    "show_diagnostics": "all",
+    "dock": "right",
   },
   "outline_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "theme": "Solarized Light",
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "minimap": {
     "show": "never",
     "thumb": "hover",
     "thumb_border": "none",
-    "current_line_highlight": "all"
+    "current_line_highlight": "all",
   },
   "restore_on_startup": "last_session",
   "file_finder": {
-    "modal_max_width": "medium"
+    "modal_max_width": "medium",
   },
-  "hints": {
-    "assignVariableTypes": true,
-    "compositeLiteralFields": true,
-    "compositeLiteralTypes": true,
-    "constantValues": true,
-    "functionTypeParameters": true,
-    "parameterNames": true,
-    "rangeVariableTypes": true
+  "inlay_hints": {
+    "enabled": false,
   },
   "languages": {
     "Ruby": {
-      "language_servers": ["ruby-lsp", "rubocop", "!solargraph"]
+      "language_servers": ["ruby-lsp", "rubocop", "!solargraph"],
     },
     "JavaScript": {
       "format_on_save": "on",
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "formatter": "prettier"
+      "formatter": "prettier",
     },
     "TypeScript": {
       "format_on_save": "on",
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "formatter": "prettier"
+      "formatter": "prettier",
     },
     "TSX": {
       "format_on_save": "on",
       "code_actions_on_format": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
       },
-      "formatter": "prettier"
-    }
+      "formatter": "prettier",
+    },
   },
   "lsp": {
     "ruby-lsp": {
       "settings": {
-        "use_bundler": true
+        "use_bundler": true,
       },
       "initialization_options": {
         "enabledFeatures": {
-          "diagnostics": true
-        }
-      }
+          "diagnostics": true,
+        },
+      },
     },
     "vtsls": {
       "settings": {
         "typescript": { "tsserver": { "maxTsServerMemory": 16184 } },
-        "javascript": { "tsserver": { "maxTsServerMemory": 16184 } }
-      }
-    }
-  }
+        "javascript": { "tsserver": { "maxTsServerMemory": 16184 } },
+      },
+    },
+  },
 }

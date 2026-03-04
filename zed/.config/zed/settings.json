@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "edit_predictions": {
+    "provider": "none"
+  },
   "agent": {
     "dock": "right",
     "default_profile": "ask",
@@ -19,9 +22,6 @@
     "dock": "right",
   },
   "icon_theme": "JetBrains Icons Dark",
-  "features": {
-    "edit_prediction_provider": "none",
-  },
   "base_keymap": "VSCode",
   "telemetry": {
     "metrics": false,
