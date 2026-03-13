@@ -349,6 +349,8 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/go/bin"
 # springhealth directory
 export SPRING_DIRECTORY=~/dev/incubyte/springhealth
+# libpq for Glomo
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 
 eval "$(zoxide init zsh)"
