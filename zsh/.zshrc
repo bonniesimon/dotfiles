@@ -313,10 +313,10 @@ load-nvmrc
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Bindings to move word in iterm
-# bindkey "[D" backward-word
-# bindkey "[C" forward-word
-# bindkey "^[a" beginning-of-line
-# bindkey "^[e" end-of-line
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
 
 # Fix issue with ruby https://github.com/rails/rails/issues/38560
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
