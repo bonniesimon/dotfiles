@@ -124,39 +124,42 @@ alias ovmc="overmind connect"
 alias oc="overmind connect"
 alias or="overmind restart"
 
-alias lock="cinnamon-screensaver-command -l"
+# [Linux Mint] lock screen via cinnamon screensaver
+# alias lock="cinnamon-screensaver-command -l"
 
 alias springhealth_dev="~/scripts/setup_springhealth_dev.sh"
- # Editor aliases for SpringHealth projects
- alias mpz="cd /home/bonstine/dev/incubyte/springhealth/member-portal && zed ."
- alias mpc="cd /home/bonstine/dev/incubyte/springhealth/member-portal && cursor ."
- alias rz="cd /home/bonstine/dev/incubyte/springhealth/rotom && zed ."
- alias rc="cd /home/bonstine/dev/incubyte/springhealth/rotom && cursor ."
+# [Linux] SpringHealth editor shortcuts - paths use /home/bonstine on Linux
+# alias mpz="cd /home/bonstine/dev/incubyte/springhealth/member-portal && zed ."
+# alias mpc="cd /home/bonstine/dev/incubyte/springhealth/member-portal && cursor ."
+# alias rz="cd /home/bonstine/dev/incubyte/springhealth/rotom && zed ."
+# alias rc="cd /home/bonstine/dev/incubyte/springhealth/rotom && cursor ."
 
-aicommit() {
-    if [ -z "$(git diff --cached)" ]; then
-        echo "No staged changes to commit."
-        return 1
-    fi
-
-    echo "🤖 Generating commit message..."
-    local commit_message=$(git diff --cached | gemini --prompt "Generate a concise commit message:")
-
-    if [ $? -eq 0 ] && [ -n "$commit_message" ]; then
-        echo "✅ Generated commit message: $commit_message"
-        echo "$commit_message" | xclip -sel clip
-        git commit
-    else
-        echo "❌ Failed to generate commit message."
-        return 1
-    fi
-}
+# [Linux] aicommit uses xclip for clipboard - use pbcopy on macOS
+# aicommit() {
+#     if [ -z "$(git diff --cached)" ]; then
+#         echo "No staged changes to commit."
+#         return 1
+#     fi
+#
+#     echo "🤖 Generating commit message..."
+#     local commit_message=$(git diff --cached | gemini --prompt "Generate a concise commit message:")
+#
+#     if [ $? -eq 0 ] && [ -n "$commit_message" ]; then
+#         echo "✅ Generated commit message: $commit_message"
+#         echo "$commit_message" | xclip -sel clip
+#         git commit
+#     else
+#         echo "❌ Failed to generate commit message."
+#         return 1
+#     fi
+# }
 
 alias sshjim='ssh -i ".ssh/jim-ec2.pem" ubuntu@ec2-65-1-134-128.ap-south-1.compute.amazonaws.com'
 
-cursor() {
-    nohup ~/Applications/cursor.appimage "$@" > /dev/null 2>&1 &
-}
+# [Linux] cursor via AppImage - on macOS cursor is installed as a standard app
+# cursor() {
+#     nohup ~/Applications/cursor.appimage "$@" > /dev/null 2>&1 &
+# }
 
 ghissue() {
   gh issue develop $1 -n "$1-$2" -b "main" -c
@@ -338,8 +341,8 @@ autoload -U +X bashcompinit && bashcompinit
 export PATH="$PATH:$HOME/.local/bin"
 # rbenv
 export PATH="$PATH:$HOME/.rbenv/bin"
-# nvim appimage to /opt/nvim/nvim
-export PATH="$PATH:/opt/nvim/"
+# [Linux] nvim AppImage - on macOS: brew install neovim
+# export PATH="$PATH:/opt/nvim/"
 # golang
 export PATH="$PATH:/usr/local/go/bin"
 # overmind
@@ -352,7 +355,7 @@ eval "$(zoxide init zsh)"
 
 # Added by `rbenv init` on Friday 04 April 2025 09:23:58 PM IST
 eval "$(rbenv init - --no-rehash zsh)"
-[[ ! -f $SPRING_DIRECTORY/spring-cli/init.sh ]] || source $SPRING_DIRECTORY/spring-cli/init.sh
+# [[ ! -f $SPRING_DIRECTORY/spring-cli/init.sh ]] || source $SPRING_DIRECTORY/spring-cli/init.sh
 
 # pnpm
 export PNPM_HOME="/home/bonstine/.local/share/pnpm"
@@ -363,7 +366,9 @@ esac
 # pnpm end
 
 # bun completions
-[ -s "/home/bonstine/.bun/_bun" ] && source "/home/bonstine/.bun/_bun"
+# [Linux] bun completions path
+# [ -s "/home/bonstine/.bun/_bun" ] && source "/home/bonstine/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
