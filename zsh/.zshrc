@@ -11,7 +11,7 @@ fi
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ruby rails yarn bundler docker docker-compose brew macos z node zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git ruby rails yarn bundler docker docker-compose brew macos z node zsh-autosuggestions zsh-syntax-highlighting git-auto-fetch)
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -111,7 +111,6 @@ fi
 
 alias lla="ls -lGAF"
 alias gs="git status --show-stash --long"
-alias rails="bundle exec rails"
 alias glogl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches"
 alias tmux="TERM=xterm-256color tmux"
 alias tf="terraform"
@@ -194,15 +193,22 @@ reset_dev() {
 }
 
 gdev() {
+  local skip_main_check=false
+  if [[ "$1" == "-s" ]]; then
+    skip_main_check=true
+    shift
+  fi
+
   if [ -z "$1" ]; then
-    echo "Usage: gdev <linear_branch_name>"
+    echo "Usage: gdev [-s] <linear_branch_name>"
+    echo "  -s  Skip the base branch check (dev/main/release)"
     return 1
   fi
 
   current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-  if [[ "$current_branch" != "dev" && "$current_branch" != "main" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
-    echo "Error: You must be on the 'dev' branch or a 'release/v**' branch or main branch to create a new branch."
+  if [[ "$skip_main_check" == false && "$current_branch" != "dev" && "$current_branch" != "main" && ! "$current_branch" =~ ^release/v[0-9]+\.* ]]; then
+    echo "Error: You must be on the 'dev' branch or a 'release/v**' branch or main branch to create a new branch. Use -s to skip this check."
     return 1
   fi
 
@@ -224,7 +230,28 @@ gdev() {
     return 1
   fi
 
-  git push -u origin "$1"
+  repo_name=$(basename "$(git rev-parse --show-toplevel)")
+  if [[ "$repo_name" == "glomopay_service" ]]; then
+    echo "⚠️  OVERCOMMIT_DISABLED=1 will be used for this push."
+    echo -n "Proceed with overcommit disabled? [y/N] "
+    read confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+      echo "Aborted."
+      return 1
+    fi
+    OVERCOMMIT_DISABLED=1 git push -u origin "$1"
+  elif [[ "$repo_name" == "glomopay-checkout" ]]; then
+    echo "⚠️  HUSKY=0 will be used for this push."
+    echo -n "Proceed with husky disabled? [y/N] "
+    read confirm
+    if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
+      echo "Aborted."
+      return 1
+    fi
+    HUSKY=0 git push -u origin "$1"
+  else
+    git push -u origin "$1"
+  fi
   if [ $? -ne 0 ]; then
     echo "Failed to push branch $1 to origin"
     return 1
@@ -303,8 +330,8 @@ load-nvmrc() {
     nvm use default
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
 
 # To make redis work with sidekiq for granite
 # export REDIS_URL="redis://127.0.0.1:6379/12"
@@ -352,15 +379,19 @@ export SPRING_DIRECTORY=~/dev/incubyte/springhealth
 # libpq for Glomo
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
+# git auto fetch - ohmyzsh plugin config
+GIT_AUTO_FETCH_INTERVAL=30
+
 
 eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"
 
 # Added by `rbenv init` on Friday 04 April 2025 09:23:58 PM IST
 eval "$(rbenv init - --no-rehash zsh)"
 # [[ ! -f $SPRING_DIRECTORY/spring-cli/init.sh ]] || source $SPRING_DIRECTORY/spring-cli/init.sh
 
 # pnpm
-export PNPM_HOME="/home/bonstine/.local/share/pnpm"
+export PNPM_HOME="/Users/bonstine/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -375,3 +406,16 @@ esac
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Claude accounts
+alias claude-my='CLAUDE_CONFIG_DIR=~/.claude-personal claude'
+
+# Remove oh-my-zsh git plugin's gl alias so glomo-cli can use it
+unalias gl 2>/dev/null
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
+
+# Android SDK (for Expo / React Native local builds)
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
