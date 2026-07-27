@@ -8,27 +8,33 @@
 [
   {
     "bindings": {
-      "ctrl-escape": "menu::Cancel"
-    }
+      "ctrl-escape": "menu::Cancel",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
       "cmd-r": "workspace::ToggleLeftDock",
-      "ctrl-b": "workspace::ToggleRightDock"
-    }
+      "ctrl-b": "workspace::ToggleRightDock",
+    },
   },
   {
     "context": "Editor",
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
-      "ctrl-b": "workspace::ToggleRightDock"
-    }
+      "ctrl-b": "workspace::ToggleRightDock",
+    },
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "shift-s": "vim::PushAddSurrounds"
-    }
-  }
+      "shift-s": "vim::PushAddSurrounds",
+    },
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "space c z": "workspace::ToggleCenteredLayout",
+    },
+  },
 ]

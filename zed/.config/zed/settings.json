@@ -7,8 +7,18 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cli_default_open_behavior": "existing_window",
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "diff_view_style": "split",
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
   "edit_predictions": {
-    "provider": "none"
+    "provider": "none",
   },
   "agent": {
     "dock": "right",
@@ -21,7 +31,11 @@
   "git_panel": {
     "dock": "right",
   },
-  "icon_theme": "JetBrains Icons Dark",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "JetBrains Icons Dark",
+    "dark": "JetBrains Icons Dark",
+  },
   "base_keymap": "VSCode",
   "telemetry": {
     "metrics": false,
@@ -53,7 +67,11 @@
   "outline_panel": {
     "dock": "right",
   },
-  "theme": "Solarized Light",
+  "theme": {
+    "mode": "dark",
+    "light": "Solarized Light",
+    "dark": "Solarized Light",
+  },
   "tab_bar": {
     "show": false,
   },
