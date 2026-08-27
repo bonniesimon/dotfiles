@@ -5,6 +5,7 @@ description: >
   restating comments, inline single-use step methods, and collapse mock-only
   specs into behavioural ones. Manual invocation only.
 disable-model-invocation: true
+allowed-tools: Read, Edit, Grep, Glob, Bash
 ---
 
 # bonnie-preferred-codestyle
@@ -13,20 +14,50 @@ A pre-PR pass over the diff you are about to raise. Ruby only.
 
 This skill supersedes parts of `CLAUDE.md`, `CLAUDE.local.md`, and
 `.claude/skills/clean-design/SKILL.md`. Where it contradicts them, this skill
-wins, and the run reports the override. See [Overrides](#overrides).
+wins, and the run reports the override. Read
+[`references/overrides.md`](references/overrides.md) only when a rule was
+actually exercised, to write the `OVERRIDES` block.
+
+## Procedure
+
+1. **Resolve the range.**
+
+   ```bash
+   base=$(gh pr view --json baseRefName -q .baseRefName 2>/dev/null || echo main)
+   git diff "$(git merge-base "origin/$base" HEAD)"   # committed + uncommitted
+   ```
+
+   `origin/main` is the fallback when `gh` is absent, unauthenticated, or the
+   branch has no PR. Say which base you resolved before touching anything.
+   Never diff against `origin/main` when the branch targets a parent PR: on a
+   stacked branch that pulls in the parent's code, which is not yours to grade.
+
+   Empty range, or no Ruby files in it: print `NOTHING IN SCOPE` and stop.
+
+2. **List the in-scope hunks and methods** (see [Scope](#scope)) before editing.
+
+3. **Edit app files directly** against [What to change](#what-to-change).
+   Comments and inlining are mechanical and `git diff` is the undo.
+
+4. **Never edit a spec without approval.** One question per proposed change,
+   wait for the answer, then move to the next. Do not batch them. Each item
+   gives: file, line range, what the examples currently assert, and the
+   behavioural example you would put there.
+
+5. **Verify.**
+
+   ```bash
+   bundle exec rubocop -A <changed app files>
+   rtk proxy bundle exec rspec <touched spec files>
+   ```
+
+   Use `rtk proxy`. Plain `rtk` serves a cached rspec log, and a stale log looks
+   exactly like a real failure. If `rtk` is not on PATH, run plain
+   `bundle exec rspec` and say so in the report.
+
+6. **Report** using the [output shape](#output-shape), exactly.
 
 ## Scope
-
-Resolve the range before reading anything:
-
-```bash
-base=$(gh pr view --json baseRefName -q .baseRefName 2>/dev/null || echo main)
-git diff "$(git merge-base "origin/$base" HEAD)"        # committed + uncommitted
-```
-
-`origin/main` is the fallback. Never diff against `origin/main` when the branch
-targets a parent PR: on a stacked branch that pulls in the parent's code, which
-is not yours to grade.
 
 **Reach.** A changed hunk puts its *enclosing method* in scope, whole, including
 lines you did not write. Nothing else in the file is in scope. If you touched
@@ -36,6 +67,9 @@ line 22 inside `#call`, all of `#call` is fair game and `#initialize` is not.
 you did not touch, however bad it is. CI time improves as PRs land, not by
 sweeping. If a neighbouring spec file is egregious, say so in one line at the end
 and leave it alone.
+
+**Out of scope.** TypeScript and the merchant dashboard. Verification here is
+rubocop and rspec.
 
 ## What to change
 
@@ -146,29 +180,15 @@ A deletion must ship with the behavioural example that replaces it. If you canno
 name the real-world scenario the deleted examples were protecting, do not propose
 the deletion.
 
-## How to run it
+## Output shape
 
-1. Resolve the range and list the in-scope hunks and methods.
-2. **Edit app files directly.** Comments and inlining are mechanical and `git
-   diff` is the undo.
-3. **Never edit a spec without approval.** List each proposed spec change as its
-   own item: file, line range, what the examples currently assert, and the
-   behavioural example you would put there. Ask per item.
-4. Verify:
-
-```bash
-bundle exec rubocop -A <changed app files>
-rtk proxy bundle exec rspec <touched spec files>
-```
-
-Use `rtk proxy`. Plain `rtk` serves a cached rspec log, and a stale log looks
-exactly like a real failure.
-
-5. Report example count and wall time, before and after, for the specs touched.
-
-### Output shape
+Print exactly this shape. Report example count and wall time, before and after,
+for the specs touched. Omit a section that has no entries; print `OVERRIDES` only
+when a rule was actually exercised, never as a standing disclaimer.
 
 ```
+BASE  origin/main (no PR found)
+
 APPLIED (app/services/kyc/foo.rb)
   - removed 4 restating comments
   - inlined 3 single-use step methods into #call
@@ -187,26 +207,3 @@ OVERRIDES (2)
   app/services/kyc/foo.rb:8   kept in/out example comment
     overrides CLAUDE.md "never what, only why"
 ```
-
-## Overrides
-
-Print the `OVERRIDES` block only when a rule was actually exercised. Silent
-otherwise. No standing disclaimer.
-
-| Superseded | Says | This skill says |
-| --- | --- | --- |
-| `CLAUDE.md` comment policy | "Only add a comment to explain why, never what" | Also allow an in/out example where the shape is not inferable |
-| `CLAUDE.local.md` | "One thought per line, one abstraction level per method. If a method mixes normalisation with a decision, extract the normalisation" | A method may carry a whole procedure. Extract only when the extracted thing earns a domain name |
-| `clean-design/SKILL.md` | "one abstraction level per method", deep modules, extract-method | Same. Inline single-use steps |
-| `spec/CLAUDE.md` coverage targets | coverage-driven | Behavioural coverage of real scenarios. A dropped mock-only example is not lost coverage |
-
-`clean-design` is team-owned and stays as it is. Its rules still govern while
-code is being written. This skill only applies when invoked.
-
-## Out of scope
-
-Everything `CLAUDE.md` marks always-on still holds and is never relaxed here:
-Redis lock and `Model.uncached` TOCTOU rules, Zeitwerk file layout, credentials
-and service-config required-key lists, PII and logging rules, migration rules.
-
-TypeScript and the merchant dashboard. Verification here is rubocop and rspec.
