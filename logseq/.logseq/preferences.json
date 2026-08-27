@@ -9,7 +9,7 @@
     "mode": "light",
     "light": {
       "name": "Flexoki Light",
-      "url": "assets:///home/bonstine/.logseq/plugins/logseq-flexoki-theme/flexoki-theme.css",
+      "url": "file:///Users/bonstine/.logseq/plugins/logseq-flexoki-theme/flexoki-theme.css",
       "description": "Enhanced Flexoki theme with warm, paper-inspired colors for light mode. Features improved accessibility, responsive design, and professional typography.",
       "mode": "light",
       "pid": "logseq-flexoki-theme",
@@ -17,7 +17,7 @@
     },
     "dark": {
       "name": "Customized Github theme",
-      "url": "assets:///home/bonstine/.logseq/plugins/logseq-cusgit-theme/custom.css",
+      "url": "file:///Users/bonstine/.logseq/plugins/logseq-cusgit-theme/custom.css",
       "description": "Customized Github theme for logseq",
       "pid": "logseq-cusgit-theme",
       "group-first": false,

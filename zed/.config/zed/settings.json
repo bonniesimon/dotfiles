@@ -32,7 +32,7 @@
     "dock": "right",
   },
   "icon_theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "JetBrains Icons Dark",
     "dark": "JetBrains Icons Dark",
   },
@@ -68,9 +68,9 @@
     "dock": "right",
   },
   "theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "Solarized Light",
-    "dark": "Solarized Light",
+    "dark": "Gruvbox Dark",
   },
   "tab_bar": {
     "show": false,

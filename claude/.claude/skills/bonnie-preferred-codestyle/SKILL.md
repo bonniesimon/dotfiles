@@ -20,6 +20,16 @@ actually exercised, to write the `OVERRIDES` block.
 
 ## Procedure
 
+Work the steps in order. Print the checklist and tick each line as you go, so a
+resumed or interrupted run knows where it stopped.
+
+- [ ] 1. base resolved, range printed
+- [ ] 2. in-scope methods listed
+- [ ] 3. app edits applied
+- [ ] 4. spec items asked one at a time, all answered
+- [ ] 5. rubocop + rspec green
+- [ ] 6. report printed
+
 1. **Resolve the range.**
 
    ```bash
@@ -53,7 +63,8 @@ actually exercised, to write the `OVERRIDES` block.
 
    Use `rtk proxy`. Plain `rtk` serves a cached rspec log, and a stale log looks
    exactly like a real failure. If `rtk` is not on PATH, run plain
-   `bundle exec rspec` and say so in the report.
+   `bundle exec rspec` and say so in the report. Run the
+   [self-check](#self-check) before reporting.
 
 6. **Report** using the [output shape](#output-shape), exactly.
 
@@ -108,9 +119,11 @@ def resides_in_india?
 
 ### Methods
 
-Inline a single-use private method that is only a step of its caller. A caller
-should read straight down. Ten lines you read once beats ten one-line methods
-you hop between.
+For each single-use private method in scope, apply the domain-name test: **does
+the name appear in compliance or product language, or is it just a label for the
+next three lines?** A label is a step of its caller. Inline it.
+
+Inline a label:
 
 ```ruby
 # before
@@ -130,9 +143,7 @@ def call
 end
 ```
 
-Keep a single-use private that names a domain concept. The test: **does the name
-appear in compliance or product language, or is it just a label for the next
-three lines?**
+Keep vocabulary:
 
 ```ruby
 # keep all three. This is the vocabulary, not indirection.
@@ -179,6 +190,19 @@ end
 A deletion must ship with the behavioural example that replaces it. If you cannot
 name the real-world scenario the deleted examples were protecting, do not propose
 the deletion.
+
+## Self-check
+
+Before printing `APPLIED`, re-read each method you edited, top to bottom.
+
+- A method that no longer fits one screen means you inlined something that
+  earned its own name. Revert that inline.
+- A comment you kept that does not state a constraint, a workaround, an edge
+  case, or a non-inferable shape is one you should have deleted.
+- An inline that moved a `return`, a `next`, or a `rescue` out of its original
+  method changed control flow. Revert it and say so.
+
+Fix what the pass finds before reporting. Do not report a finding you left.
 
 ## Output shape
 

@@ -231,7 +231,7 @@ gdev() {
   fi
 
   repo_name=$(basename "$(git rev-parse --show-toplevel)")
-  if [[ "$repo_name" == "glomopay_service" ]]; then
+  if [[ "$repo_name" == glomopay_service* ]]; then
     echo "⚠️  OVERCOMMIT_DISABLED=1 will be used for this push."
     echo -n "Proceed with overcommit disabled? [y/N] "
     read confirm
@@ -240,7 +240,7 @@ gdev() {
       return 1
     fi
     OVERCOMMIT_DISABLED=1 git push -u origin "$1"
-  elif [[ "$repo_name" == "glomopay-checkout" ]]; then
+  elif [[ "$repo_name" == glomopay-checkout* ]]; then
     echo "⚠️  HUSKY=0 will be used for this push."
     echo -n "Proceed with husky disabled? [y/N] "
     read confirm
@@ -362,6 +362,13 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
 
 # New autocomplete of zsh
 autoload -U +X bashcompinit && bashcompinit
+
+# Adding completion for ngrok
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
+
+complete -o nospace -C /usr/local/bin/terraform terraform
 
 # Adding to $PATH
 # zoxide
